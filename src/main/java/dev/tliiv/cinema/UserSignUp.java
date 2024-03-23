@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "user")
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "users")
 
 public class UserSignUp {
     @NotBlank
