@@ -1,3 +1,4 @@
+
 package dev.tliiv.cinema;
 
 import lombok.AllArgsConstructor;

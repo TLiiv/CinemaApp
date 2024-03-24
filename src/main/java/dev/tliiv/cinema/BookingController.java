@@ -1,4 +1,3 @@
-// BookingController.java
 
 package dev.tliiv.cinema;
 
