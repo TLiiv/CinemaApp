@@ -16,6 +16,6 @@ public class CinemaHallsService {
     }
 
     public Optional<CinemaHalls> singleHall(ObjectId hallId){
-        return cinemaHallsRepository.findHallByHallId(hallId);
+        return cinemaHallsRepository.findById(hallId);
     }
 }
