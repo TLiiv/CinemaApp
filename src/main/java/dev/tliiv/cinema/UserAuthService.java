@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAuthService {
     @Autowired
-    private UserRepository userRepository; // Assuming you have a UserRepository to interact with the database
+    private UserRepository userRepository;
 
     public boolean authenticateUser(String userEmail, String password) {
         User user = userRepository.findByUserEmail(userEmail);
@@ -27,6 +27,10 @@ public class UserAuthService {
             return true;
         }
         return false;
+    }
+    public boolean isUserLoggedIn(String userEmail) {
+        User user = userRepository.findByUserEmail(userEmail);
+        return user != null && user.isLoggedIn();
     }
 }
 

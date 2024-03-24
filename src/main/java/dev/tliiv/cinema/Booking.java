@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Document(collection = "bookings")
 @Data
@@ -21,4 +22,11 @@ public class Booking {
     private ObjectId hallId;
     private List<Map<String, Object>> showTimes;//Refactor to 2 classes?
     private String imdbId;
+    private List<String> bookedSeats;
+
+    public List<String> getSeatIds(List<Map<String, Object>> seats) {
+        return seats.stream()
+                .map(seat -> (String) seat.get("seatId"))
+                .collect(Collectors.toList());
+    }
 }
