@@ -19,6 +19,6 @@ public class CinemaHalls {
     private ObjectId hallId;
     private String hallName;
     private List<Map<String, Object>> seats;
-    private List<Object> showTimes;
+    private List<ShowTime> showTimes;
 }
 

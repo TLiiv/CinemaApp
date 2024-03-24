@@ -46,7 +46,8 @@ public class BookingController {
         }
 
         // Book the requested seats
-        boolean isBookingSuccessful = bookingService.bookSeats(hallId, seatIds);
+        boolean isBookingSuccessful = bookingService.bookSeats(hallId, booking.getMovieId(), seatIds);
+
         if (isBookingSuccessful) {
 
             return ResponseEntity.ok("Seats booked successfully!");

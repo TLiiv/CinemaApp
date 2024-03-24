@@ -50,11 +50,12 @@ public class BookingService {
         return true;
     }
 
-    private Optional<Map<String, Object>> findShowTimeByMovieId(CinemaHalls hall, String movieId) {
+    private Optional<ShowTime> findShowTimeByMovieId(CinemaHalls hall, String movieId) {
         return hall.getShowTimes().stream()
-                .filter(showTime -> showTime.get("movieId").equals(movieId))
+                .filter(showTime -> showTime.getMovieId().equals(movieId))
                 .findFirst();
     }
+
 
 
     public boolean bookSeats(String hallId, String movieId, List<String> seatIds) {
@@ -65,10 +66,10 @@ public class BookingService {
                 CinemaHalls hall = hallOptional.get();
 
                 // Find the show time for the specified movie
-                Optional<Map<String, Object>> showTimeOptional = findShowTimeByMovieId(hall, movieId);
+                Optional<ShowTime> showTimeOptional = findShowTimeByMovieId(hall, movieId);
 
                 if (showTimeOptional.isPresent()) {
-                    Map<String, Object> showTime = showTimeOptional.get();
+                    ShowTime showTime = showTimeOptional.get();
                     // Perform the booking logic (update the availability of seats, etc.)
                     List<Map<String, Object>> seats = hall.getSeats();
                     for (Map<String, Object> seat : seats) {
@@ -97,5 +98,6 @@ public class BookingService {
             return false; // Return false to indicate failure
         }
     }
-    }
+
+}
 
