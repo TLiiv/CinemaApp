@@ -50,8 +50,52 @@ public class BookingService {
         return true;
     }
 
-    public boolean bookSeats(String hallId, List<String> seatIds) {
-        // Implement booking logic here
-        return true; // Placeholder, assuming booking is always successful for now
+    private Optional<Map<String, Object>> findShowTimeByMovieId(CinemaHalls hall, String movieId) {
+        return hall.getShowTimes().stream()
+                .filter(showTime -> showTime.get("movieId").equals(movieId))
+                .findFirst();
     }
-}
+
+
+    public boolean bookSeats(String hallId, String movieId, List<String> seatIds) {
+        try {
+            // Fetch the CinemaHalls document based on hallId
+            Optional<CinemaHalls> hallOptional = cinemaHallsRepository.findById(new ObjectId(hallId));
+            if (hallOptional.isPresent()) {
+                CinemaHalls hall = hallOptional.get();
+
+                // Find the show time for the specified movie
+                Optional<Map<String, Object>> showTimeOptional = findShowTimeByMovieId(hall, movieId);
+
+                if (showTimeOptional.isPresent()) {
+                    Map<String, Object> showTime = showTimeOptional.get();
+                    // Perform the booking logic (update the availability of seats, etc.)
+                    List<Map<String, Object>> seats = hall.getSeats();
+                    for (Map<String, Object> seat : seats) {
+                        String seatId = (String) seat.get("seatId");
+                        if (seatIds.contains(seatId)) {
+                            seat.put("available", false); // Booked seats are marked as unavailable
+                        }
+                    }
+
+                    // Save the updated CinemaHalls document
+                    cinemaHallsRepository.save(hall);
+
+                    // Return true to indicate successful booking
+                    return true;
+                } else {
+                    // Return false if the show time for the specified movie is not found
+                    return false;
+                }
+            } else {
+                // Return false if the hall is not found
+                return false;
+            }
+        } catch (Exception e) {
+            // Handle any exceptions that occur during the booking process
+            e.printStackTrace(); // Log the exception for debugging
+            return false; // Return false to indicate failure
+        }
+    }
+    }
+
