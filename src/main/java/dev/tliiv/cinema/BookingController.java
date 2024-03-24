@@ -50,7 +50,7 @@ public class BookingController {
         // Book the requested seats
         boolean isBookingSuccessful = bookingService.bookSeats(hallId, seatIds);
         if (isBookingSuccessful) {
-          
+            
             return ResponseEntity.ok("Seats booked successfully!");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to book seats.");
