@@ -1,5 +1,6 @@
 package dev.tliiv.cinema;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class MovieController {
         return new ResponseEntity<List<Movie>>(movieService.allMovies(),HttpStatus.OK);
     }
 
-    @GetMapping("/{movieId}")
-    public ResponseEntity<Optional<Movie>> getMovieById(@PathVariable Object movieId){
-        return new ResponseEntity<Optional<Movie>>(movieService.getMovieById(movieId), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Movie>> getMovieById(@PathVariable ObjectId id){
+        return new ResponseEntity<Optional<Movie>>(movieService.getMovieById(id), HttpStatus.OK);
     }
 }

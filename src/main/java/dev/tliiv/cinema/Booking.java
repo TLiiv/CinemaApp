@@ -20,9 +20,11 @@ public class Booking {
     @Id
     private ObjectId bookingId;
     private ObjectId hallId;
-    private List<Map<String, Object>> showTimes;//Refactor to 2 classes?
-    private String imdbId;
+    private String MovieId;
+    private List<Map<String, Object>> showTimes;
     private List<String> bookedSeats;
+
+
 
     public List<String> getSeatIds(List<Map<String, Object>> seats) {
         return seats.stream()

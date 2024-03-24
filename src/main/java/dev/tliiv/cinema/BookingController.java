@@ -23,6 +23,7 @@ public class BookingController {
 
     @Autowired
     private CinemaHallsRepository cinemaHallsRepository;
+    @Autowired MovieRepository movieRepository;
 
     @PostMapping("/{hallId}/book-seats")
     public ResponseEntity<?> bookSeats(@PathVariable("hallId") String hallId,
@@ -50,10 +51,27 @@ public class BookingController {
         // Book the requested seats
         boolean isBookingSuccessful = bookingService.bookSeats(hallId, seatIds);
         if (isBookingSuccessful) {
-            
+            // Fetch the movie details associated with the booked show time
+//            Optional<Movie> movieOptional = movieRepository.getMovieById(new ObjectId(booking.getMovieId()));
+//            if (movieOptional.isPresent()) {
+//                Movie movie = movieOptional.get();
+//                // Update the user's preferredGenres list with the genres from the booked movie
+//                updateUserPreferredGenres(userEmail, movie.getGenres());
+//            }
+
             return ResponseEntity.ok("Seats booked successfully!");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to book seats.");
         }
+//        private void updateUserPreferredGenres(String userEmail, List<String> movieGenres){
+//            Optional<User> userOptional = userRepository.findByUserEmail(userEmail);
+//            if (userOptional.isPresent()) {
+//                User user = userOptional.get();
+//                // Update the user's preferredGenres list with the genres from the booked movie
+//                user.getPreferredGenres().addAll(movieGenres);
+//                // Save the updated user object
+//                userRepository.save(user);
+//            }
+       // }
     }
 }

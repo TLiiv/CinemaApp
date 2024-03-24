@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, ObjectId> {
-    Optional<Movie> getMovieById(Object movieId);
+    Optional<Movie> getMovieById(ObjectId id);
 }
