@@ -1,5 +1,6 @@
 package dev.tliiv.cinema;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CinemaHallsController {
         return new ResponseEntity<List<CinemaHalls>>(cinemaHallsService.allCinemaHalls(), HttpStatus.OK);
     }
     @GetMapping("/{hallId}")
-    public ResponseEntity<Optional<CinemaHalls>> getSingleHall(@PathVariable String hallId){
+    public ResponseEntity<Optional<CinemaHalls>> getSingleHall(@PathVariable ObjectId hallId){
         return new ResponseEntity<Optional<CinemaHalls>>(cinemaHallsService.singleHall(hallId), HttpStatus.OK);
     }
 }

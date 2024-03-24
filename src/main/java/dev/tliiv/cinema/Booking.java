@@ -8,8 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Document(collection = "bookings")
 @Data
@@ -18,15 +16,9 @@ import java.util.stream.Collectors;
 
 public class Booking {
     @Id
-    private ObjectId bookingId;
+    private ObjectId userId;
     private ObjectId hallId;
-    private List<Map<String, Object>> showTimes;
     private String movieId;
     private List<String> bookedSeats;
 
-    public List<String> getSeatIds(List<Map<String, Object>> seats) {
-        return seats.stream()
-                .map(seat -> (String) seat.get("seatId"))
-                .collect(Collectors.toList());
-    }
 }

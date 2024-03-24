@@ -1,5 +1,6 @@
 package dev.tliiv.cinema;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class CinemaHallsService {
         return cinemaHallsRepository.findAll();
     }
 
-    public Optional<CinemaHalls> singleHall(String hallId){
+    public Optional<CinemaHalls> singleHall(ObjectId hallId){
         return cinemaHallsRepository.findHallByHallId(hallId);
     }
 }

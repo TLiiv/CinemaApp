@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CinemaHallsRepository extends MongoRepository<CinemaHalls, ObjectId> {
-    Optional<CinemaHalls> findHallByHallId(String hallId);
+    Optional<CinemaHalls> findHallByHallId(ObjectId hallId);
 }
