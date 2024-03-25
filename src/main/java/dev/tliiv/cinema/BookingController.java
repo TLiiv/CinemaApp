@@ -23,7 +23,8 @@ public class BookingController {
                     booking.getUserId(),
                     booking.getHallId(),
                     booking.getMovieId(),
-                    booking.getBookedSeats()
+                    booking.getBookedSeats(),
+                    booking.getBookedShowTimes()
             );
             return ResponseEntity.status(HttpStatus.CREATED).body(createdBooking);
         } catch (IllegalArgumentException e) {

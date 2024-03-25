@@ -20,5 +20,5 @@ public class Booking {
     private ObjectId hallId;
     private String movieId;
     private List<String> bookedSeats;
-
+    private List<String> bookedShowTimes;
 }
