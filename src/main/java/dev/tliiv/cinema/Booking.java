@@ -18,7 +18,7 @@ public class Booking {
     @Id
     private ObjectId userId;
     private ObjectId hallId;
-    private String movieId;
+    private ObjectId movieId;
     private List<String> bookedSeats;
     private List<String> bookedShowTimes;
 }

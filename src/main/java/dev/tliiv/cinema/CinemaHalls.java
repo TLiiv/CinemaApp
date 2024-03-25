@@ -19,5 +19,6 @@ public class CinemaHalls {
     private String hallName;
     private List<String> seats;
     private List<ShowTime> showTimes;
+
 }
 

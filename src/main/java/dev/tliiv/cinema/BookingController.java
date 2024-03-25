@@ -31,7 +31,6 @@ public class BookingController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid booking information: " + e.getMessage());
         }
     }
-
 }
 
 

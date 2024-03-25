@@ -20,7 +20,7 @@ public class BookingService {
     @Autowired UserRepository userRepository;
     @Autowired MovieService movieService;
 
-    public Booking createBooking(ObjectId userId, ObjectId hallId, String movieId, List<String> bookedSeats, List<String> bookedShowTimes) {
+    public Booking createBooking(ObjectId userId, ObjectId hallId, ObjectId movieId, List<String> bookedSeats, List<String> bookedShowTimes) {
         // Validate input parameters
         if (userId == null || hallId == null || movieId == null || bookedSeats == null || bookedSeats.isEmpty()) {
             throw new IllegalArgumentException("Invalid booking information");
@@ -34,8 +34,8 @@ public class BookingService {
         if (!areCorrectShowTimes(hallId, movieId, bookedShowTimes)) {
             throw new IllegalArgumentException("Incorrect show time(s) for the movie");
         }
-        ObjectId movieObjectId = new ObjectId(movieId);
-        Optional<Movie> movieOptional = movieService.findById(movieObjectId);
+
+        Optional<Movie> movieOptional = movieService.findById(movieId);
         if (movieOptional.isEmpty()) {
             throw new IllegalArgumentException("Movie not found");
         }
@@ -75,7 +75,7 @@ public class BookingService {
         updateCinemaHallsWithBookedSeats(hallId, movieId, bookedSeats);
         return booking;
     }
-    private boolean areSeatsAvailable(ObjectId hallId, String movieId, List<String> bookedSeats) {
+    private boolean areSeatsAvailable(ObjectId hallId, ObjectId movieId, List<String> bookedSeats) {
         // Retrieve the CinemaHalls document for the specified hallId
         Optional<CinemaHalls> cinemaHallsOptional = cinemaHallsRepository.findById(hallId);
         if (cinemaHallsOptional.isEmpty()) {
@@ -124,7 +124,7 @@ public class BookingService {
         // Check if all booked seats are valid
         return bookedSeats.stream().allMatch(availableSeats::contains);
     }
-    private boolean areCorrectShowTimes(ObjectId hallId, String movieId, List<String> requestedShowTimes) {
+    private boolean areCorrectShowTimes(ObjectId hallId, Object movieId, List<String> requestedShowTimes) {
         // Retrieve the CinemaHalls document for the specified hallId
         Optional<CinemaHalls> cinemaHallsOptional = cinemaHallsRepository.findById(hallId);
         if (cinemaHallsOptional.isEmpty()) {
@@ -147,7 +147,7 @@ public class BookingService {
         return true; // All requested show times are correct for the movie
     }
 
-    private void updateCinemaHallsWithBookedSeats(ObjectId hallId, String movieId, List<String> bookedSeats) {
+    private void updateCinemaHallsWithBookedSeats(ObjectId hallId, ObjectId movieId, List<String> bookedSeats) {
         // Retrieve the CinemaHalls document for the specified hallId
         Optional<CinemaHalls> cinemaHallsOptional = cinemaHallsRepository.findById(hallId);
         if (cinemaHallsOptional.isEmpty()) {
