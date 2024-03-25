@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/bookings")
+@CrossOrigin(origins = "http://localhost:3000")// because of CORS, Front end cannot locally connect otherwise
 public class BookingController {
 
     @Autowired
