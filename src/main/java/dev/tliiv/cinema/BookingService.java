@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BookingService {
@@ -15,6 +16,7 @@ public class BookingService {
     @Autowired
     private CinemaHallsRepository cinemaHallsRepository;
 
+
     public Booking createBooking(ObjectId userId, ObjectId hallId, String movieId, List<String> bookedSeats) {
         // Validate input parameters
         if (userId == null || hallId == null || movieId == null || bookedSeats == null || bookedSeats.isEmpty()) {
@@ -23,7 +25,9 @@ public class BookingService {
         if (!areSeatsAvailable(hallId, movieId, bookedSeats)) {
             throw new IllegalArgumentException("Requested seats are not available");
         }
-
+        if (!areSeatsValid(hallId, bookedSeats)) {
+            throw new IllegalArgumentException("Invalid seat(s) requested");
+        }
         // Create a new Booking object
         Booking booking = new Booking();
         booking.setUserId(userId);
@@ -46,13 +50,14 @@ public class BookingService {
 
         CinemaHalls cinemaHalls = cinemaHallsOptional.get();
 
-        // Find the show time for the specified movieId
+
+        // Find the showtime for the specified movieId
         Optional<ShowTime> showTimeOptional = cinemaHalls.getShowTimes().stream()
                 .filter(showTime -> showTime.getMovieId().equals(movieId))
                 .findFirst();
 
         if (showTimeOptional.isEmpty()) {
-            // Show time not found for the movie
+            // Showtime not found for the movie
             return false;
         }
 
@@ -71,7 +76,19 @@ public class BookingService {
         return true;
     }
 
+    private boolean areSeatsValid(ObjectId hallId, List<String> bookedSeats) {
+        // Retrieve the CinemaHalls document for the specified hallId
+        Optional<CinemaHalls> cinemaHallsOptional = cinemaHallsRepository.findById(hallId);
+        if (cinemaHallsOptional.isEmpty()) {
+            return false;
+        }
 
+        CinemaHalls cinemaHalls = cinemaHallsOptional.get();
+        Set<String> availableSeats = Set.copyOf(cinemaHalls.getSeats());
+
+        // Check if all booked seats are valid
+        return bookedSeats.stream().allMatch(availableSeats::contains);
+    }
     private void updateCinemaHallsWithBookedSeats(ObjectId hallId, String movieId, List<String> bookedSeats) {
         // Retrieve the CinemaHalls document for the specified hallId
         Optional<CinemaHalls> cinemaHallsOptional = cinemaHallsRepository.findById(hallId);
@@ -82,19 +99,19 @@ public class BookingService {
 
         CinemaHalls cinemaHalls = cinemaHallsOptional.get();
 
-        // Find the show time for the specified movieId
+        // Find the showtime for the specified movieId
         Optional<ShowTime> showTimeOptional = cinemaHalls.getShowTimes().stream()
                 .filter(showTime -> showTime.getMovieId().equals(movieId))
                 .findFirst();
 
         if (showTimeOptional.isEmpty()) {
-            // Show time not found for the movie, handle appropriately (throw exception, log error, etc.)
+            // Showtime not found for the movie, handle appropriately (throw exception, log error, etc.)
             return;
         }
 
         ShowTime showTime = showTimeOptional.get();
 
-        // Update the bookedSeats array for the corresponding show time
+        // Update the bookedSeats array for the corresponding showtime
         List<String> alreadyBookedSeats = showTime.getBookedSeats();
         alreadyBookedSeats.addAll(bookedSeats);
 
