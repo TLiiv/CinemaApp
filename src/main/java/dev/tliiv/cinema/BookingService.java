@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -15,7 +16,9 @@ public class BookingService {
     private BookingRepository bookingRepository;
     @Autowired
     private CinemaHallsRepository cinemaHallsRepository;
-
+    @Autowired MovieRepository movieRepository;
+    @Autowired UserRepository userRepository;
+    @Autowired MovieService movieService;
 
     public Booking createBooking(ObjectId userId, ObjectId hallId, String movieId, List<String> bookedSeats, List<String> bookedShowTimes) {
         // Validate input parameters
@@ -31,6 +34,33 @@ public class BookingService {
         if (!areCorrectShowTimes(hallId, movieId, bookedShowTimes)) {
             throw new IllegalArgumentException("Incorrect show time(s) for the movie");
         }
+        ObjectId movieObjectId = new ObjectId(movieId);
+        Optional<Movie> movieOptional = movieService.findById(movieObjectId);
+        if (movieOptional.isEmpty()) {
+            throw new IllegalArgumentException("Movie not found");
+        }
+        Movie movie = movieOptional.get();
+
+        // Retrieve user information
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        User user = userOptional.get();
+
+        // Add booked movie genres to the user's preferred genres list
+        List<String> userPreferredGenres = new ArrayList<>(user.getPreferredGenres());
+        List<String> movieGenres = movie.getGenres();
+        for (String genre : movieGenres) {
+            if (!userPreferredGenres.contains(genre)) {
+                userPreferredGenres.add(genre);
+            }
+        }
+        user.setPreferredGenres(userPreferredGenres);
+
+        // Update user document
+        userRepository.save(user);
+
         // Create a new Booking object
         Booking booking = new Booking();
         booking.setUserId(userId);
