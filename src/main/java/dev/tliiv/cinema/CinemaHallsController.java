@@ -15,9 +15,10 @@ import java.util.Optional;
 public class CinemaHallsController {
     @Autowired
     private CinemaHallsService cinemaHallsService;
+
     @GetMapping
     public ResponseEntity<List<CinemaHalls>> getAllCinemaHalls(){
-        return new ResponseEntity<List<CinemaHalls>>(cinemaHallsService.allCinemaHalls(), HttpStatus.OK);
+        return new ResponseEntity<List<CinemaHalls>>(cinemaHallsService.getAllCinemaHalls(),HttpStatus.OK);
     }
     @GetMapping("/{hallId}")
     public ResponseEntity<Optional<CinemaHalls>> getSingleHall(@PathVariable ObjectId hallId){

@@ -11,7 +11,7 @@ import java.util.Optional;
 public class CinemaHallsService {
     @Autowired
     private CinemaHallsRepository cinemaHallsRepository;
-    public List<CinemaHalls> allCinemaHalls(){
+    public List<CinemaHalls> getAllCinemaHalls(){
         return cinemaHallsRepository.findAll();
     }
 
