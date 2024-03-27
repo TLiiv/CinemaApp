@@ -16,8 +16,8 @@ function App() {
   
   return (
     <div>
-        <CinemaHalls />
-        {/* <Movies/> */}
+        {/* <CinemaHalls /> */}
+        <Movies/>
     </div>
   );
 }

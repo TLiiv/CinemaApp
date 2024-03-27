@@ -4,6 +4,7 @@ import MovieCard from './MovieCard';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { v4 as uuidv4 } from 'uuid';
 
 
 //tegelikult hakkame datat cinema-hallsist või ei ? teha kõik movied ja siis kui
@@ -46,19 +47,8 @@ const Movies = () => {
             // Iterate over showtimes of each cinema hall
             cinemaHall.showTimes.forEach(showtime => {
               // Find the movie associated with the showtime
-              
-              //const movie = movies.find(movie => movie._id?.$oid === showtime.movieId?.$oid);
-              const movie = movies.find(movie => movie.movieId?.$oid === showtime.movieId?.$oid);
-              if (movie?.movieId?.$oid !== undefined) {
-                // The $oid property is not undefined
-                
-                console.log('hei')
-                
-              } else {
-                // The $oid property is undefined
-                // Handle the case where the property is undefined...
-                console.log('ohno')
-              }
+
+              const movie = movies.find(movie => movie.movieId === showtime.movieId);
               if (movie) {
                 // Add movie to the list along with cinema hall and showtime details
                 moviesWithShowtimes.push({
@@ -69,15 +59,29 @@ const Movies = () => {
               }
             });
           });
+          moviesWithShowtimes.sort((a, b) => {
+            // Extract start times from strings and convert to Date objects
+            const startTimeA = new Date(`1970-01-01T${a.showtime.startTime}`);
+            const startTimeB = new Date(`1970-01-01T${b.showtime.startTime}`);
+            // Compare start times
+            return startTimeA - startTimeB;
+          });
+        
       
-          return moviesWithShowtimes;
+          return moviesWithShowtimes.map(item => ({
+            ...item,
+            showtime: {
+              ...item.showtime,
+              startTime: new Date(`1970-01-01T${item.showtime.startTime}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            }
+          }));
         };
 
        
   
      return (<Container>
       {generateMoviesFromShowtimes().map(({ movie, cinemaHall, showtime }) => (
-        <MovieCard key={showtime._id?.$oid} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
+        <MovieCard key={uuidv4()} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
       ))}
     </Container>
   );
@@ -90,14 +94,3 @@ const Movies = () => {
 
 export default Movies;
 
-// {/* <Container>
-//             <Row>
-//       {movies && movies.map(movie => (
-//           <Col xl={12}>
-//             {/* needs a key! but objectId.. */}
-//               <MovieCard movie={movie} />
-//           </Col>
-//       ))}
-//       </Row>
-//         </Container>
-//     ); */}
