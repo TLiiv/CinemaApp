@@ -49,9 +49,9 @@ const CinemaHalls = () => {
             <div key={hall.id}>
                 <h2>{hall.hallName}</h2>
                 <div className="CinemaHallSeats">
-                    {hall.seats.map((seat, index) => (
+                    {hall.seats.map((seat) => (
                         <>
-                            <CinemaSeat seatName={seat} />
+                            <CinemaSeat key={seat} seatName={seat} isBooked={hall.showTimes.some(show => show.bookedSeats.includes(seat))} /> 
                         </>
                     ))}
                 </div>

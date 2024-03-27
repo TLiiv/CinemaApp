@@ -1,4 +1,4 @@
-.Seat {
+  .Seat {
     background-color: #444451;
     height: 25px;
     width: 20px;
@@ -12,5 +12,5 @@
   }
   
   .Seat-occupied {
-    background-color: #fff;
+    background-color: magenta;
   }
