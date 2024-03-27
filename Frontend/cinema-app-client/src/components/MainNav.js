@@ -2,18 +2,23 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
 
 
 const MainNav =() => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">PÕHJATAEVAS</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
+    <Navbar bg="dark" expand="lg" className="bg-body-tertiary">
+      <Container fluid>
+        <Navbar.Brand href="/">PÕHJATAEVAS</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav 
+          className="me-auto my-2 my-lg-0"
+          style={{maxHeight:'100px'}}
+          navbarScroll
+          >
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/else">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -26,6 +31,8 @@ const MainNav =() => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <Button variant="outline-info" classname="me2">Login</Button>
+          <Button variant="outline-info" classname="me2">Sign Up</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
