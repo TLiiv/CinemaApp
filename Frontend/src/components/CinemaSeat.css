@@ -1,0 +1,16 @@
+.Seat {
+    background-color: #444451;
+    height: 25px;
+    width: 20px;
+    margin: 3px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .Seat-selected {
+    background-color: #6feaf6;
+  }
+  
+  .Seat-occupied {
+    background-color: #fff;
+  }

@@ -1,0 +1,7 @@
+.CinemaHallSeats {
+    display: grid;
+    grid-gap: 6px;
+    grid-template-columns: repeat(10, min-content);
+    align-items: center;
+  }
+  
