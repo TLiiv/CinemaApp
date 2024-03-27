@@ -1,29 +1,47 @@
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import testImage from './testimage.jpg'; 
+import Card from 'react-bootstrap/Card'; 
 import './MovieCard.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
-const MovieCard =()=> {
-  
-  
-  return (
-    <Card style={{ width: '50rem' }} className="movie-card">
-    <div className="card-content">
-      <Card.Img variant="top" src={testImage} className="movie-image" /> 
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
+
+const MovieCard = ({ movie }) => {
+
+
+    return (
+        <div className="movie-card">
+        <img src={movie.poster} className="movie-image" alt={movie.title} />
+        <div className="movie-details">
+            <h2 className="movie-title">{movie.title}</h2>
+            <p className="movie-description">Description goes here...</p>
+                    <Button variant="dark" href="#">Go somewhere</Button>
+        </div>
     </div>
-  </Card>
-  );
-    
+    );
+
 }
+
+
+//<Container>
+        //     <Row>
+        //         <Col>
+        //             <Card style={{ width: '18rem' }} className="movie-card">
+        //                 <div className="card-content">
+        //                     <Card.Img variant="left" src={movie.poster} className="movie-image" />
+        //                     <Card.Body className="card-body">
+        //                         <Card.Title>{movie.title}</Card.Title>
+        //                         <Card.Text>
+        //                             Algusaeg
+        //                         </Card.Text>
+        //                         <Button variant="primary">Go somewhere</Button>
+        //                     </Card.Body>
+        //                 </div>
+        //             </Card>
+        //         </Col>
+        //     </Row> with bootrspt card
+        // </Container>
 
 export default MovieCard;

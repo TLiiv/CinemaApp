@@ -1,5 +1,5 @@
 import React from "react";
-// import "./App.css";
+//  import "./App.css";
 
 import MainLayout from "./layouts/MainLayout";
 import Movies from "./components/Movies";

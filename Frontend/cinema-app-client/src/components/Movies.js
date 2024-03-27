@@ -1,7 +1,9 @@
-import Stack from 'react-bootstrap/Stack';
 import API from '../API/axiosConfig';
 import{useState,useEffect} from 'react';
 import MovieCard from './MovieCard';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 //tegelikult hakkame datat cinema-hallsist või ei ? teha kõik movied ja siis kui
@@ -28,19 +30,24 @@ const Movies = () => {
           getMovies();
         },[])
 
-        const moviesList = movies?.map((movie) => (
-            <Stack gap={3}>
-            <div className='p-2'>{movie.title}</div>
-            </Stack>
-        ));
   
   
-    return (
-    <div>
-        <MovieCard/>
-      </div>
-    
-  );
+     return (
+      <Container>
+            <Row>
+      {movies && movies.map(movie => (
+          <Col xl={12}>
+            {/* needs a key! but objectId.. */}
+              <MovieCard movie={movie} />
+          </Col>
+      ))}
+      </Row>
+        </Container>
+    );
+
+  
 }
+
+
 
 export default Movies;
