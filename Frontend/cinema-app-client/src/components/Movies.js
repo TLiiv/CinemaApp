@@ -1,6 +1,7 @@
 import Stack from 'react-bootstrap/Stack';
 import API from '../API/axiosConfig';
 import{useState,useEffect} from 'react';
+import MovieCard from './MovieCard';
 
 
 //tegelikult hakkame datat cinema-hallsist või ei ? teha kõik movied ja siis kui
@@ -36,7 +37,7 @@ const Movies = () => {
   
     return (
     <div>
-        {moviesList}
+        <MovieCard/>
       </div>
     
   );

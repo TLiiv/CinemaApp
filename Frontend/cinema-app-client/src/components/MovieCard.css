@@ -1,0 +1,18 @@
+.card-content {
+    display: flex;
+  }
+  
+  .card-content .card-img-top {
+    flex: 0 0 auto; 
+    margin-right: 20px; 
+  }
+
+  .movie-card {
+    width: 50rem; 
+    text-align: center;
+  }
+  
+  .movie-image {
+    width: 300px; 
+    height: auto; 
+  }

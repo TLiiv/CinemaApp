@@ -5,6 +5,7 @@ import MainLayout from "./layouts/MainLayout";
 import Movies from "./components/Movies";
 
 import CinemaHalls from "./components/CinemaHalls";
+import MovieCard from "./components/MovieCard";
 
 
 
@@ -15,8 +16,8 @@ function App() {
   
   return (
     <div>
-        <CinemaHalls />
-        {/* <Movies /> */}
+        
+        <Movies/>
     </div>
   );
 }

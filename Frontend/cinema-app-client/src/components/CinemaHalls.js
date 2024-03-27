@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 import {useState,useEffect} from 'react';
 import CinemaSeat from './CinemaSeat';
 import API from '../API/axiosConfig';
@@ -41,11 +43,14 @@ const CinemaHalls = () => {
 {/* need to check how to use mongo ObjectId as a key */}
     //Real code starts from here ObjectId.toString()?
  
-    //   ));
+   
+      //refactor this if time
+    const cinemaHall = cinemaHalls.map((hall,index) => {
+        // const hallId = hall._id ? hall._id.toString() : index;
       
-    const cinemaHall = cinemaHalls.map(hall => {
         return (
-            <div key={hall.id}>
+            <div key={hall._id?.$oid || index}>
+                {/* "key solution too hacky" */}
                 <h2>{hall.hallName}</h2>
                 {hall.showTimes.map((showTime, index) => (
                     <div key={index}>
@@ -69,7 +74,6 @@ const CinemaHalls = () => {
 
     return (
             <>
-            {/* <CinemaSeat  /> */}
             {cinemaHall}
             </>
            
