@@ -3,7 +3,6 @@ package dev.tliiv.cinema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -11,8 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShowTime {
+//    @JsonSerialize(using = ObjectIdSerializer.class)
+//    @JsonDeserialize(using = ObjectIdDeserializer.class)
     private String startTime;
-    private ObjectId movieId;
+    private String movieId;
     private List<String> bookedSeats;
 }
 

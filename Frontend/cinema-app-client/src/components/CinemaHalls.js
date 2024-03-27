@@ -16,7 +16,7 @@ const CinemaHalls = () => {
     const getCinemaHalls = async () => {
         try{
             const response = await API.get("/api/v1/cinema-halls");
-            console.log(response.data);
+            //console.log(response.data);
             setCinemaHalls(response.data);
 
         }catch(error){
@@ -49,8 +49,8 @@ const CinemaHalls = () => {
         // const hallId = hall._id ? hall._id.toString() : index;
       
         return (
-            <div key={hall._id?.$oid || index}>
-                {/* "key solution too hacky" */}
+            <div key={hall.hallId?.$oid || index}> 
+                {/* "key solution too hacky" proovida hall.hallId?.$oid  */}
                 <h2>{hall.hallName}</h2>
                 {hall.showTimes.map((showTime, index) => (
                     <div key={index}>
@@ -69,7 +69,6 @@ const CinemaHalls = () => {
             </div>
         );
     });
-   
 
 
     return (

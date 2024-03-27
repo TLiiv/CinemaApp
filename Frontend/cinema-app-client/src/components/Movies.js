@@ -13,41 +13,91 @@ import Col from 'react-bootstrap/Col';
 //üles?
 const Movies = () => {
   
-    const [movies,setMovies] = useState();
         
-        const getMovies = async () => { 
-            try {
-              const response = await API.get("/api/v1/movies");
-              console.log(response.data);
-              setMovies(response.data); // Set movies to response.data
-            } catch (error) {
-              console.log(error);
-            }
-          }
+    const [movies, setMovies] = useState([]);
+    const [cinemaHalls, setCinemaHalls] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          // Fetch backend data
+          const moviesResponse = await API.get("/api/v1/movies");
+          setMovies(moviesResponse.data);
+  
+          
+          const cinemaHallsResponse = await API.get("/api/v1/cinema-halls");
+          setCinemaHalls(cinemaHallsResponse.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+  
+      fetchData();
+    }, []);
         
         
-        useEffect(()=>{
-          getMovies();
-        },[])
 
+        const generateMoviesFromShowtimes = () => {
+          const moviesWithShowtimes = [];
+      
+          // Iterate over cinema halls
+          cinemaHalls.forEach(cinemaHall => {
+            // console.log(`data from cinema halls ${cinemaHall}`)
+            // Iterate over showtimes of each cinema hall
+            cinemaHall.showTimes.forEach(showtime => {
+              // Find the movie associated with the showtime
+              
+              //const movie = movies.find(movie => movie._id?.$oid === showtime.movieId?.$oid);
+              const movie = movies.find(movie => movie.movieId?.$oid === showtime.movieId?.$oid);
+              if (movie?.movieId?.$oid !== undefined) {
+                // The $oid property is not undefined
+                
+                console.log('hei')
+                
+              } else {
+                // The $oid property is undefined
+                // Handle the case where the property is undefined...
+                console.log('ohno')
+              }
+              if (movie) {
+                // Add movie to the list along with cinema hall and showtime details
+                moviesWithShowtimes.push({
+                  movie,
+                  cinemaHall,
+                  showtime
+                });
+              }
+            });
+          });
+      
+          return moviesWithShowtimes;
+        };
+
+       
   
-  
-     return (
-      <Container>
-            <Row>
-      {movies && movies.map(movie => (
-          <Col xl={12}>
-            {/* needs a key! but objectId.. */}
-              <MovieCard movie={movie} />
-          </Col>
+     return (<Container>
+      {generateMoviesFromShowtimes().map(({ movie, cinemaHall, showtime }) => (
+        <MovieCard key={showtime._id?.$oid} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
       ))}
-      </Row>
-        </Container>
-    );
+    </Container>
+  );
+};
+      
+ 
 
-  
-}
 
 
 
 export default Movies;
+
+// {/* <Container>
+//             <Row>
+//       {movies && movies.map(movie => (
+//           <Col xl={12}>
+//             {/* needs a key! but objectId.. */}
+//               <MovieCard movie={movie} />
+//           </Col>
+//       ))}
+//       </Row>
+//         </Container>
+//     ); */}

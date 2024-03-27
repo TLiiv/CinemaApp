@@ -3,7 +3,6 @@ package dev.tliiv.cinema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,9 +15,9 @@ import java.util.List;
 
 public class Booking {
     @Id
-    private ObjectId userId;
-    private ObjectId hallId;
-    private ObjectId movieId;
+    private String userId;
+    private String hallId;
+    private String movieId;
     private List<String> bookedSeats;
     private List<String> bookedShowTimes;
 }

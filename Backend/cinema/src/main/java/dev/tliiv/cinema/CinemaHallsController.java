@@ -21,7 +21,7 @@ public class CinemaHallsController {
         return new ResponseEntity<List<CinemaHalls>>(cinemaHallsService.getAllCinemaHalls(),HttpStatus.OK);
     }
     @GetMapping("/{hallId}")
-    public ResponseEntity<Optional<CinemaHalls>> getSingleHall(@PathVariable ObjectId hallId){
+    public ResponseEntity<Optional<CinemaHalls>> getSingleHall(@PathVariable String hallId){
         return new ResponseEntity<Optional<CinemaHalls>>(cinemaHallsService.singleHall(hallId), HttpStatus.OK);
     }
 }

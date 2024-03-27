@@ -1,6 +1,5 @@
 package dev.tliiv.cinema;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class MovieService {
     public Optional<Movie> singleMovie(String imdbId){
         return movieRepository.findMovieByImdbId(imdbId);
     }
-    public Optional<Movie> findById(ObjectId movieId) {
+    public Optional<Movie> findById(String movieId) {
         return movieRepository.findById(movieId);
     }
 }
