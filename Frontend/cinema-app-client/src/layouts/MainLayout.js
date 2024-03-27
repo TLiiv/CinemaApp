@@ -1,13 +1,16 @@
 import MainNav from '../components/MainNav';
 import Footer from '../components/Footer';
-import Movies from '../components/Movies';
+import { Outlet } from 'react-router-dom';
+
 
      const MainLayout = () => {
         return (
             <>
-            <MainNav/>
-            
-            <Footer/>
+            {/* <MainNav/> */}
+            <main>
+            <Outlet />
+            </main>
+            {/* <Footer/> */}
             </>
         );
      }
