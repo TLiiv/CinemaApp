@@ -14,13 +14,10 @@ const cinemaSeatClickHandler = (e) => {
             setSelectSeat(!selectSeat);
         }
     };
-    // let isBooked=false;
+    
 
     return  (<div className={`Seat ${isBooked ? 'Seat-occupied' : ''} ${selectSeat ? 'Seat-selected' : ''}`} onClick={cinemaSeatClickHandler}></div>)
 }  
 
 export default CinemaSeat;
 
-//<div className="CinemaSeat">
-//<div className={`Seat ${selectSeat ? 'Seat-selected' : ''}`} onClick={cinemaSeatClickHandler}></div>
-//</div>

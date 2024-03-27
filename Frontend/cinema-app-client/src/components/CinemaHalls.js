@@ -44,17 +44,23 @@ const CinemaHalls = () => {
     //   ));
       
     const cinemaHall = cinemaHalls.map(hall => {
-        
         return (
             <div key={hall.id}>
                 <h2>{hall.hallName}</h2>
-                <div className="CinemaHallSeats">
-                    {hall.seats.map((seat) => (
-                        <>
-                            <CinemaSeat key={seat} seatName={seat} isBooked={hall.showTimes.some(show => show.bookedSeats.includes(seat))} /> 
-                        </>
-                    ))}
-                </div>
+                {hall.showTimes.map((showTime, index) => (
+                    <div key={index}>
+                        <h3>Start Time: {showTime.startTime}</h3>
+                        <div className="CinemaHallSeats">
+                            {hall.seats.map(seat => (
+                                <CinemaSeat
+                                    key={seat}
+                                    seatName={seat}
+                                    isBooked={showTime.bookedSeats.includes(seat)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))}
             </div>
         );
     });
@@ -69,5 +75,8 @@ const CinemaHalls = () => {
            
     );
 }
+
+
+
 
 export default CinemaHalls;
