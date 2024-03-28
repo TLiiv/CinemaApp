@@ -2,8 +2,7 @@ import API from '../API/axiosConfig';
 import{useState,useEffect} from 'react';
 import MovieCard from './MovieCard';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -13,10 +12,10 @@ import { v4 as uuidv4 } from 'uuid';
 //peale vajutada siis viib sinna nii, et backdrop vastab filmile. Traileri link ka
 //üles?
 const Movies = () => {
-  
-        
+   
     const [movies, setMovies] = useState([]);
     const [cinemaHalls, setCinemaHalls] = useState([]);
+    // const [moviesWithShowtimes, setMoviesWithShowtimes] = useState([]);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -24,8 +23,7 @@ const Movies = () => {
           // Fetch backend data
           const moviesResponse = await API.get("/api/v1/movies");
           setMovies(moviesResponse.data);
-  
-          
+
           const cinemaHallsResponse = await API.get("/api/v1/cinema-halls");
           setCinemaHalls(cinemaHallsResponse.data);
         } catch (error) {
@@ -35,8 +33,19 @@ const Movies = () => {
   
       fetchData();
     }, []);
-        
-        
+   
+  
+//click events for movie filtering in Home Component
+// const generateMoviesByHall = () => {
+//   const filteredMovies = movies.filter(movie => {
+//       const hallNames = movie.cinemaHalls.map(cinemaHall => cinemaHall.hallName);
+//       return hallNames.includes(selectedHall);
+//   });
+
+//   return filteredMovies;
+// };
+
+// const filteredMovies = generateMoviesByHall();
 
         const generateMoviesFromShowtimes = () => {
           const moviesWithShowtimes = [];
@@ -77,8 +86,16 @@ const Movies = () => {
           }));
         };
 
-       
+        
   
+
+      //   return (
+      //     <Container>
+      //     {filteredMovies.map(({ movie, cinemaHall, showtime }) => (
+      //         <MovieCard key={uuidv4()} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
+      //     ))}
+      // </Container>
+      //   ) 
      return (<Container>
       {generateMoviesFromShowtimes().map(({ movie, cinemaHall, showtime }) => (
         <MovieCard key={uuidv4()} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
@@ -88,9 +105,6 @@ const Movies = () => {
 };
       
  
-
-
-
 
 export default Movies;
 

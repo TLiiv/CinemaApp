@@ -1,111 +1,135 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
+import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import {useState,useEffect} from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import API from '../API/axiosConfig';
 
+const MainNav = () => {
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showSignupModal, setShowSignupModal] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const MainNav =( {movies, setFilteredMovies} ) => {
+    const handleShowSignupModal = () => setShowSignupModal(true);
+    const handleCloseSignupModal = () => setShowSignupModal(false);
 
-  const [genres, setGenres] = useState([]);
-
-  useEffect(() => {
-    const fetchGenres = async () => {
+    const handleSignup = async () => { 
       try {
-        const moviesResponse = await API.get("/api/v1/movies");
-        const uniqueGenres = Array.from(new Set(moviesResponse.data.flatMap(movie => movie.genres)));
-        setGenres(uniqueGenres);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchGenres();
-  }, []);
-
-
-  const handleGenreSelect = async (genre) => {
-    try {
-      const moviesResponse = await API.get("/api/v1/movies");
-      const filteredMovies = moviesResponse.data.filter(movie => movie.genres.includes(genre));
-      setFilteredMovies(filteredMovies);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleSortByStartTime = async () => {
-    try {
-      const moviesResponse = await API.get("/api/v1/movies");
-      const sortedMovies = moviesResponse.data.sort((a, b) => {
-        const startTimeA = new Date(a.showTimes[0].startTime);
-        const startTimeB = new Date(b.showTimes[0].startTime);
-        return startTimeA - startTimeB;
-      });
-      setFilteredMovies(sortedMovies);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  return (
-    <Navbar bg="dark" expand="lg" className="bg-body-tertiary">
-      <Navbar.Brand href="/">PÕHJATAEVAS</Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbarScroll" />
-      <Navbar.Collapse id="navbarScroll">
-        <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/else">Link</Nav.Link>
-          <NavDropdown title="Genre" id="basic-nav-dropdown">
-            {genres.map((genre, index) => (
-              <NavDropdown.Item key={index} onClick={() => handleGenreSelect(genre)}>{genre}</NavDropdown.Item>
-            ))}
-          </NavDropdown>
-          <NavDropdown title="Sort by" id="basic-nav-dropdown">
-            <NavDropdown.Item onClick={handleSortByStartTime}>Start Time</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-        <Button variant="outline-info" className="me2">Login</Button>
-        <Button variant="outline-info" className="me2">Sign Up</Button>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-    };
-  
-//     <Navbar bg="dark" expand="lg" className="bg-body-tertiary">
-//       <Container fluid>
-//         <Navbar.Brand href="/">PÕHJATAEVAS</Navbar.Brand>
-//         <Navbar.Toggle aria-controls="navbarScroll" />
-//         <Navbar.Collapse id="navbarScroll">
-//           <Nav 
-//           className="me-auto my-2 my-lg-0"
-//           style={{maxHeight:'100px'}}
-//           navbarScroll
-//           >
-//             <Nav.Link href="/">Home</Nav.Link>
-//             <Nav.Link href="/else">Link</Nav.Link>
-//             <NavDropdown title="Genre" id="basic-nav-dropdown">
+          const response = await API.post('/api/v1/signup', {
+              userEmail: email,
+              password: password
+          });
+          if (response.status === 200) {
+              setIsLoggedIn(true);
+              setShowSignupModal(false);
               
-//               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-//               <NavDropdown.Item href="#action/3.2">
-//                 Another action
-//               </NavDropdown.Item>
-//               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-//               <NavDropdown.Divider />
-//               <NavDropdown.Item href="#action/3.4">
-//                 Separated link
-//               </NavDropdown.Item>
-//             </NavDropdown>
-//           </Nav>
-//           <Button variant="outline-info" classname="me2">Login</Button>
-//           <Button variant="outline-info" classname="me2">Sign Up</Button>
-//         </Navbar.Collapse>
-//       </Container>
-//     </Navbar>
-//   );
-// }
+          }
+      } catch (error) {
+          console.error('Signup failed:', error);
+      }
+  };
 
+    const handleLogin = async () => {
+        try {
+            const response = await API.post('/api/v1/auth/login', {
+                userEmail: email,
+                password: password
+            });
+            if (response.status === 200) {
+                setIsLoggedIn(true);
+                setShowLoginModal(false);
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
+    };
+
+    const handleLogout = async () => {
+      try {
+          // Send request to backend to logout user
+          const response = await API.post('/api/v1/auth/logout', { userEmail: email });
+          if (response.status === 200) {
+              setIsLoggedIn(false); 
+          } else {
+              console.error('Logout failed:', response.data.error);
+          }
+      } catch (error) {
+          console.error('Logout failed:', error);
+      }
+  };
+
+    const handleShowLoginModal = () => setShowLoginModal(true);
+    const handleCloseLoginModal = () => setShowLoginModal(false);
+
+    return (
+        <Navbar bg="dark" expand="lg" className="bg-body-tertiary">
+            <Navbar.Brand href="/">PÕHJATAEVAS</Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll">
+                <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/else">Link</Nav.Link>
+                </Nav>
+                {!isLoggedIn ? (
+                    <Button variant="outline-info" className="me-2" onClick={handleShowLoginModal}>Login</Button>
+                ) : (
+                    <Button variant="outline-info" className="me-2" onClick={handleLogout}>Logout</Button>
+                )}
+                {!isLoggedIn && <Button onClick={handleShowSignupModal} variant="outline-info" className="me-2">Sign Up</Button>}
+            </Navbar.Collapse>
+
+            {/* Login */}
+            <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Login</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseLoginModal}>Close</Button>
+                    <Button variant="primary" onClick={handleLogin}>Login</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showSignupModal} onHide={handleCloseSignupModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Sign Up</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseSignupModal}>Close</Button>
+                    <Button onClick={handleShowSignupModal} variant="outline-info" className="me-2">Sign Up</Button>
+                </Modal.Footer>
+            </Modal>
+
+        </Navbar>
+    );
+};
 
 export default MainNav;
-
-

@@ -20,7 +20,7 @@ public class UserSignUpService {
         User user = new User();
         user.setUserEmail(signUpRequest.getUserEmail());
         user.setPassword(signUpRequest.getPassword());
-        user.setLoggedIn(false); // Set default value
+        user.setLoggedIn(true); // Set default value
         user.setPreferredGenres(new ArrayList<>()); // Set default value
 
         // Save the user to the database

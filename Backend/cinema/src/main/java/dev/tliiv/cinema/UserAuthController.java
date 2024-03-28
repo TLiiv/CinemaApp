@@ -18,13 +18,21 @@ public class UserAuthController {
         boolean isAuthenticated = userAuthService.authenticateUser(user.getUserEmail(), user.getPassword());
 
         if (isAuthenticated) {
-            // Authentication successful
-            return ResponseEntity.ok().build();
+            // Update loggedIn status to true
+            boolean isUpdated = userAuthService.updateLoggedInStatus(user.getUserEmail(), true);
+            if (isUpdated) {
+                // Login successful
+                return ResponseEntity.ok().build();
+            } else {
+                // Failed to update loggedIn status
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
         } else {
             // Authentication failed
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(@RequestBody User user) {

@@ -28,9 +28,14 @@ public class UserAuthService {
         }
         return false;
     }
-    public boolean isUserLoggedIn(String userEmail) {
+    public boolean updateLoggedInStatus(String userEmail, boolean loggedInStatus) {
         User user = userRepository.findByUserEmail(userEmail);
-        return user != null && user.isLoggedIn();
+        if (user != null) {
+            user.setLoggedIn(loggedInStatus);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }
 
