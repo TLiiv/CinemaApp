@@ -21,7 +21,7 @@ const MovieCard = ({ movie, cinemaHall, showtime }) => {
         <img src={movie.poster} className="movie-image" alt={movie.title} />
         <div className="movie-details">
             <h2 className="movie-title">{movie.title}</h2>
-            <p className="movie-description">Description goes here...</p>
+            <p className="movie-description">{movie.genres.join(', ')}</p>
             <p className="movie-description">{cinemaHall.hallName}</p>
             <p className="movie-description">Start Time: {showtime.startTime}</p>
                     <Button variant="dark" href="#">Buy Tickets</Button>
