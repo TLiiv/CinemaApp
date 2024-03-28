@@ -3,19 +3,18 @@ import{useState,useEffect} from 'react';
 import MovieCard from './MovieCard';
 import Container from 'react-bootstrap/Container';
 
+
 import { v4 as uuidv4 } from 'uuid';
 
-
-//tegelikult hakkame datat cinema-hallsist või ei ? teha kõik movied ja siis kui
-//movie-id vastab cinema-hall movie-id-ga siis genereerib sinna cinema halli nime
-//et nagu need filmid on nendes cinema hallides. movied teeme cardist. ja kui
-//peale vajutada siis viib sinna nii, et backdrop vastab filmile. Traileri link ka
-//üles?
 const Movies = () => {
    
+    // const [movies, setMovies] = useState([]);
+    // const [cinemaHalls, setCinemaHalls] = useState([]);
     const [movies, setMovies] = useState([]);
     const [cinemaHalls, setCinemaHalls] = useState([]);
-    // const [moviesWithShowtimes, setMoviesWithShowtimes] = useState([]);
+   
+    
+    
   
     useEffect(() => {
       const fetchData = async () => {
@@ -47,7 +46,7 @@ const Movies = () => {
 
 // const filteredMovies = generateMoviesByHall();
 
-        const generateMoviesFromShowtimes = () => {
+        const generateMoviesFromShowtimes = () => { //VAJALIK! SELLE panin nimeks asemel 2 tükki
           const moviesWithShowtimes = [];
       
           // Iterate over cinema halls
@@ -86,8 +85,8 @@ const Movies = () => {
           }));
         };
 
-        
-  
+      
+
 
       //   return (
       //     <Container>
@@ -96,14 +95,14 @@ const Movies = () => {
       //     ))}
       // </Container>
       //   ) 
-     return (<Container>
+     return (<Container> 
       {generateMoviesFromShowtimes().map(({ movie, cinemaHall, showtime }) => (
         <MovieCard key={uuidv4()} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
       ))}
     </Container>
   );
 };
-      
+
  
 
 export default Movies;

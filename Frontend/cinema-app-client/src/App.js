@@ -18,15 +18,17 @@ function App() {
   
   return (
     <div className="App">
+         <div className="App">
       <MainNav />
-     <Routes>
-      <Route path="/" element={<MainLayout/>}>
-      <Route path="/" element={<Home/>}></Route>
-      <Route path="Booking" element={<Booking />}></Route>
-      <Route path="Trailer/:ytTrailerId" element={<Trailer/>}></Route>
-      </Route>
-     </Routes>
-     {/* <Footer /> */}
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} /> {/* Default route for / */}
+          <Route path="booking" element={<Booking />} />
+        </Route>
+        <Route path="Trailer/:ytTrailerId" element={<Trailer />} />
+      </Routes>
+      {/* <Footer /> */}
+    </div>
     </div>
   );
 }
