@@ -68,11 +68,13 @@
 // };
 
 // export default Home;
+
+//testing with html button
 import React, { useState, useEffect } from 'react';
 import Movies from '../components/Movies';
 import Dropdown from 'react-bootstrap/Dropdown';
 import API from '../API/axiosConfig';
-import CinemaHalls from '../components/CinemaHalls';
+
 
 const Home = () => {
   const [sortBy, setSortBy] = useState(null); // Initial sorting state
@@ -112,7 +114,7 @@ const Home = () => {
         <button onClick={() => handleSortByOption("latest")}>Latest Start Time</button>
         <button onClick={() => handleSortByOption("hall")}>Hall</button>
       </div>
-      {/* Optional genre dropdown (uncomment if needed) */}
+    
       <Dropdown>
         <Dropdown.Toggle variant="light" id="dropdown-basic-genre">
           Genre

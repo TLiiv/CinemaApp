@@ -1,0 +1,231 @@
+[{
+  "_id": {
+    "$oid": "6605c75dddadad35f341956f"
+  },
+  "hallName": "Põhjanael",
+  "price": 19,
+  "seats": [
+    "1A",
+    "2A",
+    "3A",
+    "4A",
+    "5A",
+    "6A",
+    "7A",
+    "8A",
+    "9A",
+    "10A",
+    "11A",
+    "12A",
+    "13A",
+    "14A",
+    "15A",
+    "16A",
+    "17A",
+    "18A",
+    "19A",
+    "20A"
+  ],
+  "showTimes": [
+    {
+      "startTime": "18:00:00",
+      "movieId": {
+        "$oid": "65f9eabf31363b7ae65e59a2"
+      },
+      "bookedSeats": []
+    },
+    {
+      "startTime": "21:00:00",
+      "movieId": {
+        "$oid": "65f9eabf31363b7ae65e59a3"
+      },
+      "bookedSeats": [
+        "1A",
+        "2A",
+        "3A"
+      ]
+    }
+  ],
+  "_class": "dev.tliiv.cinema.CinemaHalls"
+},
+{
+  "_id": {
+    "$oid": "6605c79fddadad35f3419570"
+  },
+  "hallName": "Suur Vanker",
+  "price": 9,
+  "seats": [
+    "1C",
+    "2C",
+    "3C",
+    "4C",
+    "5C",
+    "6C",
+    "7C",
+    "8C",
+    "9C",
+    "10C",
+    "11C",
+    "12C",
+    "13C",
+    "14C",
+    "15C",
+    "16C",
+    "17C",
+    "18C",
+    "19C",
+    "20C",
+    "21C",
+    "22C",
+    "23C",
+    "24C",
+    "25C",
+    "26C",
+    "27C",
+    "28C",
+    "29C",
+    "30C",
+    "31C",
+    "32C",
+    "33C",
+    "34C",
+    "35C",
+    "36C",
+    "37C",
+    "38C",
+    "39C",
+    "40C",
+    "41C",
+    "42C",
+    "43C",
+    "44C",
+    "45C",
+    "46C",
+    "47C",
+    "48C",
+    "49C",
+    "50C",
+    "51C",
+    "52C",
+    "53C",
+    "54C",
+    "55C",
+    "56C",
+    "57C",
+    "58C",
+    "59C",
+    "60C"
+  ],
+  "showTimes": [
+    {
+      "startTime": "10:00:00",
+      "movieId": "65f9eabf31363b7ae65e59a8",
+      "bookedSeats": [
+        "1C",
+        "2C",
+        "3C"
+      ]
+    },
+    {
+      "startTime": "13:00:00",
+      "movieId": "65f9eabf31363b7ae65e59a2",
+      "bookedSeats": []
+    },
+    {
+      "startTime": "16:00:00",
+      "movieId": "65f9eabf31363b7ae65e59a9",
+      "bookedSeats": []
+    },
+    {
+      "startTime": "19:00:00",
+      "movieId": "65f9eabf31363b7ae65e59aa",
+      "bookedSeats": []
+    },
+    {
+      "startTime": "21:00:00",
+      "movieId": "65f9eabf31363b7ae65e59ab",
+      "bookedSeats": []
+    }
+  ],
+  "_class": "dev.tliiv.cinema.CinemaHalls"
+},
+{
+  "_id": {
+    "$oid": "6605c7beddadad35f3419571"
+  },
+  "hallName": "Väike Vanker",
+  "price": 9,
+  "seats": [
+    "1B",
+    "2B",
+    "3B",
+    "4B",
+    "5B",
+    "6B",
+    "7B",
+    "8B",
+    "9B",
+    "10B",
+    "11B",
+    "12B",
+    "13B",
+    "14B",
+    "15B",
+    "16B",
+    "17B",
+    "18B",
+    "19B",
+    "20B",
+    "21B",
+    "22B",
+    "23B",
+    "24B",
+    "25B",
+    "26B",
+    "27B",
+    "28B",
+    "29B",
+    "30B",
+    "31B",
+    "32B",
+    "33B",
+    "34B",
+    "35B",
+    "36B",
+    "37B",
+    "38B",
+    "39B",
+    "40B"
+  ],
+  "showTimes": [
+    {
+      "startTime": "11:30:00",
+      "movieId": {
+        "$oid": "65f9eabf31363b7ae65e59a4"
+      },
+      "bookedSeats": []
+    },
+    {
+      "startTime": "14:30:00",
+      "movieId": {
+        "$oid": "65f9eabf31363b7ae65e59a5"
+      },
+      "bookedSeats": []
+    },
+    {
+      "startTime": "18:30:00",
+      "movieId": {
+        "$oid": "65f9eabf31363b7ae65e59a6"
+      },
+      "bookedSeats": []
+    },
+    {
+      "startTime": "20:30:00",
+      "movieId": {
+        "$oid": "65f9eabf31363b7ae65e59a7"
+      },
+      "bookedSeats": []
+    }
+  ],
+  "_class": "dev.tliiv.cinema.CinemaHalls"
+}]

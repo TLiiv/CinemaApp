@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "66009c3809c90b2c61d3c235"
+  },
+  "hallId": "6603ee1fddadad35f3419528",
+  "movieId": "65f9eabf31363b7ae65e59a8",
+  "bookedSeats": [
+    "1C",
+    "2C",
+    "3C"
+  ],
+  "bookedShowTimes": [
+    "10:00:00"
+  ],
+  "_class": "dev.tliiv.cinema.Booking"
+}]

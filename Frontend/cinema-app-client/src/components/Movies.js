@@ -34,17 +34,6 @@ const Movies = ({sortBy}) => {
     }, []);
    
   
-//click events for movie filtering in Home Component
-// const generateMoviesByHall = () => {
-//   const filteredMovies = movies.filter(movie => {
-//       const hallNames = movie.cinemaHalls.map(cinemaHall => cinemaHall.hallName);
-//       return hallNames.includes(selectedHall);
-//   });
-
-//   return filteredMovies;
-// };
-
-// const filteredMovies = generateMoviesByHall();
 
 
 

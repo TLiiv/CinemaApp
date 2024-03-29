@@ -1,0 +1,87 @@
+[{
+  "_id": {
+    "$oid": "65ff1ef3eb4d3f4c29eeecde"
+  },
+  "userEmail": "Põhjanael@fakemail.ee",
+  "password": "randomnum",
+  "preferredGenres": [],
+  "loggedIn": true,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "660078588de73305ec083b51"
+  },
+  "userEmail": "uus@katse.ee",
+  "password": "parool",
+  "preferredGenres": [],
+  "loggedIn": false,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "66009c3809c90b2c61d3c235"
+  },
+  "userEmail": "veel@katse.ee",
+  "password": "par0ol",
+  "preferredGenres": [
+    "Science Fiction",
+    "Action",
+    "Adventure",
+    "Fantasy",
+    "Family",
+    "Comedy"
+  ],
+  "loggedIn": false,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "6605bab7858ff627e736b264"
+  },
+  "userEmail": "tere@tere.ee",
+  "password": "tere",
+  "preferredGenres": [],
+  "loggedIn": false,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "6605badf858ff627e736b265"
+  },
+  "userEmail": "haha@haha.ee",
+  "password": "haha",
+  "preferredGenres": [],
+  "loggedIn": false,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "6605bbf1245f2f52c0385054"
+  },
+  "userEmail": "hehe@haha.ee",
+  "password": "haha",
+  "preferredGenres": [],
+  "loggedIn": true,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "6605be16245f2f52c0385055"
+  },
+  "userEmail": "asd@gfg",
+  "password": "ahdljsad",
+  "preferredGenres": [],
+  "loggedIn": true,
+  "_class": "dev.tliiv.cinema.User"
+},
+{
+  "_id": {
+    "$oid": "6605be2b245f2f52c0385056"
+  },
+  "userEmail": "asd@gfg1",
+  "password": "ahdljsad",
+  "preferredGenres": [],
+  "loggedIn": true,
+  "_class": "dev.tliiv.cinema.User"
+}]

@@ -90,6 +90,8 @@
 
 // export default BookingModal;
 // BookingModal Component
+
+//Booking testing
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap'; 
 import axios from 'axios'; 
@@ -107,7 +109,7 @@ const BookingModal = ({ showModal, onClose,cinemaHall }) => {
    
   
    
-    useEffect(() => {
+     useEffect(() => {
         if (cinemaHall) {
           setSelectedShowTime(location.state?.showTime);
           setMovieId(location.state?.movieId);
@@ -116,8 +118,8 @@ const BookingModal = ({ showModal, onClose,cinemaHall }) => {
           setSelectedShowTime(showTime);
         }
       }, [cinemaHall, location]);
-
-
+    
+    
     const handleSeatSelection = (seat) => {
         setSelectedSeats(prevSeats => {
             if (prevSeats.includes(seat)) {
@@ -181,3 +183,5 @@ const BookingModal = ({ showModal, onClose,cinemaHall }) => {
 };
 
 export default BookingModal;
+
+
