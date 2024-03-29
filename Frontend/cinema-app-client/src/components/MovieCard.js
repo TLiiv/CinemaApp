@@ -20,6 +20,7 @@ const MovieCard = ({ movie, cinemaHall, showtime }) => {
                 <h2 className="movie-title">{movie.title}</h2>
                 <p className="movie-description">{movie.genres.join(', ')}</p>
                 <p className="movie-description">{cinemaHall.hallName}</p>
+                <p className="movie-description">{cinemaHall.price}€</p>
                 <p className="movie-description">Start Time: {showtime.startTime}</p>
                 <Button variant="dark" onClick={() => navigate('/booking', { state: { cinemaHall } })}>Book Tickets</Button>
             </div>

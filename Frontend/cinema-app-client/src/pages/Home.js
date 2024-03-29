@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Movies from '../components/Movies';
 import Dropdown from 'react-bootstrap/Dropdown';
 import API from '../API/axiosConfig';
+import CinemaHalls from '../components/CinemaHalls';
 
 const Home = () => {
 

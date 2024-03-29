@@ -97,7 +97,13 @@ const Movies = () => {
       //   ) 
      return (<Container> 
       {generateMoviesFromShowtimes().map(({ movie, cinemaHall, showtime }) => (
-        <MovieCard key={uuidv4()} movie={movie} cinemaHall={cinemaHall} showtime={showtime} />
+        <MovieCard 
+        key={uuidv4()} 
+        movie={movie} 
+        cinemaHall={cinemaHall} 
+        showtime={showtime} 
+        
+        />
       ))}
     </Container>
   );
