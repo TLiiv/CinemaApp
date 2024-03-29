@@ -27,7 +27,7 @@ const Booking = () => {
           {cinemaHall ? (
             <BookingContent
               cinemaHall={cinemaHall}
-              cinemaHalls={allCinemaHalls}
+              
               ticketAmount={ticketAmount}
               onDecreaseTicket={decreaseTicketAmount}
               onIncreaseTicket={increaseTicketAmount}
