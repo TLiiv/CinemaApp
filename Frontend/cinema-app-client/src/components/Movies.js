@@ -47,7 +47,7 @@ const Movies = ({sortBy}) => {
 // const filteredMovies = generateMoviesByHall();
 
 
-//
+
 const generateMoviesFromShowtimes = () => {
   const moviesWithShowtimes = [];
 
@@ -63,6 +63,8 @@ const generateMoviesFromShowtimes = () => {
       }
     });
   });
+
+
 
   // Apply sorting based on sortBy value
   switch (sortBy) {

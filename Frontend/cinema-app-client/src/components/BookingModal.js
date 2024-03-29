@@ -104,26 +104,28 @@ const BookingModal = ({ showModal, onClose,cinemaHall }) => {
     const [selectedShowTime, setSelectedShowTime] = useState(null);
     const [movieId, setMovieId] = useState(null);
     const location = useLocation();
+   
   
+   
     useEffect(() => {
         if (cinemaHall) {
-          setSelectedCinemaHall(cinemaHall);
           setSelectedShowTime(location.state?.showTime);
           setMovieId(location.state?.movieId);
+          const showTime = cinemaHall.showTimes.find(showTime => showTime.movieId === location.state?.movieId && showTime.startTime === location.state?.showTime);
+          setSelectedCinemaHall(cinemaHall);
+          setSelectedShowTime(showTime);
         }
       }, [cinemaHall, location]);
 
+
     const handleSeatSelection = (seat) => {
-      const newSelectedSeats = [...selectedSeats];
-      if (newSelectedSeats.includes(seat)) {
-        // Remove seat from selection
-        const index = newSelectedSeats.indexOf(seat);
-        newSelectedSeats.splice(index, 1);
-      } else {
-        // Add seat to selection
-        newSelectedSeats.push(seat);
-      }
-      setSelectedSeats(newSelectedSeats);
+        setSelectedSeats(prevSeats => {
+            if (prevSeats.includes(seat)) {
+                return prevSeats.filter(selectedSeat => selectedSeat !== seat);
+            } else {
+                return [...prevSeats, seat];
+            }
+        });
     };
   
     const handleBooking = async () => {
